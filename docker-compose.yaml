@@ -36,7 +36,7 @@ services:
 
   searxng:
     container_name: searxng
-    image: searxng/searxng:latest
+    image: risios/searxng:latest
     networks:
       - searxng
     ports:
