@@ -401,6 +401,7 @@ engines:
     shortcut: go
     # see https://docs.searxng.org/src/searx.engines.google.html#module-searx.engines.google
     use_mobile_ui: false
+    disabled: true
     # additional_tests:
     #   android: *test_android
 
@@ -1105,6 +1106,7 @@ engines:
     shortcut: brave
     engine: xpath
     paging: false
+    disabled: true
     search_url: https://search.brave.com/search?q={query}
     url_xpath: //div[@class="snippet fdb"]/a/@href
     title_xpath: //span[@class="snippet-title"]
