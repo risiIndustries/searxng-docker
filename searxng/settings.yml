@@ -14,7 +14,7 @@ search:
   # Existing autocomplete backends: "dbpedia", "duckduckgo", "google",
   # "startpage", "swisscows", "qwant", "wikipedia" - leave blank to turn it off
   # by default.
-  autocomplete: "duckduckgo"
+  autocomplete: "google"
   # Default search language - leave blank to detect from browser information or
   # use codes from 'languages.py'
   default_lang: ""
@@ -196,7 +196,7 @@ engines:
   - name: bing
     engine: bing
     shortcut: bi
-    disabled: true
+    disabled: false
 
   - name: bing images
     engine: bing_images
@@ -273,7 +273,7 @@ engines:
     engine: duckduckgo_definitions
     shortcut: ddd
     weight: 2
-    disabled: true
+    disabled: false
     tests: *tests_infobox
 
   - name: docker hub
@@ -291,6 +291,7 @@ engines:
   - name: duckduckgo
     engine: duckduckgo
     shortcut: ddg
+    disabled: true
 
   - name: duckduckgo images
     engine: duckduckgo_images
@@ -1105,14 +1106,23 @@ engines:
   - name: brave
     shortcut: brave
     engine: xpath
-    paging: false
-    disabled: true
-    search_url: https://search.brave.com/search?q={query}
-    url_xpath: //div[@class="snippet fdb"]/a/@href
+    paging: true
+    time_range_support: true
+    first_page_num: 0
+    time_range_url: "&tf={time_range_val}"
+    search_url: https://search.brave.com/search?q={query}&offset={pageno}&spellcheck=1{time_range}
+    url_xpath: //a[@class="result-header"]/@href
     title_xpath: //span[@class="snippet-title"]
     content_xpath: //p[1][@class="snippet-description"]
     suggestion_xpath: //div[@class="text-gray h6"]/a
+    time_range_map:
+      day: 'pd'
+      week: 'pw'
+      month: 'pm'
+      year: 'py'
     categories: [general, web]
+    headers:
+      Accept-Encoding: gzip, deflate
     about:
       website: https://brave.com/search/
       wikidata_id: Q107355971
